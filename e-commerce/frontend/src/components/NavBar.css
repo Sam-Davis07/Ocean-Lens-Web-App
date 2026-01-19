@@ -1,0 +1,163 @@
+/* NAVBAR */
+.navbar {
+  background-color: var(--nav-bg);
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 14px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-links a,
+.logo {
+  color: var(--text-color);
+}
+
+/* LEFT */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.menu-icon {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* INLINE LINKS (LAPTOP DEFAULT) */
+.nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* CENTER */
+.nav-center {
+  text-align: center;
+}
+
+.logo {
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* RIGHT */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+/* SEARCH */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f1f1f1;
+  padding: 6px 10px;
+  border-radius: 20px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 140px;
+}
+
+/* ICONS */
+.icon-btn,
+.icon-badge {
+  position: relative;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+}
+
+.icon-badge .badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #ff3f6c;
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* DROPDOWN MENU */
+.dropdown-menu {
+  position: absolute;
+  top: 64px;
+  left: 16px;
+  background: white;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 2000;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* PHONE VIEW */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* hide inline links */
+  }
+
+  .search-box {
+    display: none; /* optional: hide search on phone */
+  }
+}
+
+
+.user-dropdown {
+  position: relative;
+}
+
+.user-menu {
+  position: absolute;
+  top: 34px;
+  right: 0;
+  background: white;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 120px;
+  z-index: 3000;
+}
+
+.user-menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.user-menu a:hover {
+  color: #ff3f6c;
+}
+
+

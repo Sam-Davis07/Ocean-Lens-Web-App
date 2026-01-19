@@ -1,0 +1,29 @@
+/* DEFAULT (LIGHT) */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --nav-bg: #ffffff;
+  --card-bg: #ffffff;
+  --border-color: #e5e5e5;
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f5f5f5;
+  --nav-bg: #1e1e1e;
+  --card-bg: #1f1f1f;
+  --border-color: #333333;
+}
+
+/* APPLY */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* SMOOTH TRANSITION */
+* {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}

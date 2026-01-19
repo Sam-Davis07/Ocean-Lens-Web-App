@@ -1,0 +1,17 @@
+.shop-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 20px;
+}
+
+/* LEFT SIDEBAR */
+.filter-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+}
+
+/* RIGHT PRODUCT AREA */
+.product-area {
+  flex: 1; /* 🔥 THIS MAKES PRODUCTS GO TO THE RIGHT */
+}
