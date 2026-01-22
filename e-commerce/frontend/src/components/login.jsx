@@ -1,4 +1,4 @@
-import "./login.css";
+import "./lo.css";
 
 /* 🔒 BACKEND IMPORTS – UNCHANGED */
 import { useState, useEffect } from "react";
@@ -17,8 +17,8 @@ import {
 
 /* 🎨 UI ASSETS (from new design) */
 import leftImage from "./assets/xfbxfb.jpg";
-import rectangleBtn from "./assets/awdaw15.png";
-import rectangleInput from "./assets/awdaw15.png;
+import rectangleBtn from "./assets/sfgsge.png";
+import rectangleInput from "./assets/awdaw15.png";
 import line3 from "./assets/line2.svg";
 import line4 from "./assets/line2.svg";
 
