@@ -10,6 +10,8 @@ import { getProducts, getCart, addToCart, removeFromCart } from "./api"
 import "./App.css"
 
 export default function App() {
+  const [user, setUser] = useState(null)
+  
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState([])
   const [wishlist, setWishlist] = useState([])
@@ -19,7 +21,14 @@ export default function App() {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || "light"
   )
-
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user")
+  
+    if (savedUser) {
+      setUser(JSON.parse(savedUser))
+    }
+  }, [])
+  
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme)
     localStorage.setItem("theme", theme)
@@ -69,9 +78,11 @@ export default function App() {
         cartCount={cart.length}
         wishlistCount={wishlist.length}
         onSearch={setSearchQuery}
-        theme={theme}              
-        toggleTheme={toggleTheme} 
+        theme={theme}
+        toggleTheme={toggleTheme}
+        user={user}
       />
+
 
 
       <Routes>
