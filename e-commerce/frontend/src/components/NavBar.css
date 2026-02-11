@@ -77,15 +77,14 @@
   background: transparent;
   width: 140px;
 }
-
-/* ICONS */
 .icon-btn,
 .icon-badge {
   position: relative;
   font-size: 18px;
-  color: #333;
+  color: var(--text-color);
   cursor: pointer;
 }
+
 
 .icon-badge .badge {
   position: absolute;
@@ -158,6 +157,21 @@
 
 .user-menu a:hover {
   color: #ff3f6c;
+}
+/* USER LETTER AVATAR */
+.user-letter {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ff3f6c;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
 
