@@ -16,6 +16,7 @@ export default function Navbar({
   onSearch,
   toggleTheme,
   theme,
+  user
 }) {
   const [search, setSearch] = useState("")
   const [menuOpen, setMenuOpen] = useState(false)
@@ -30,6 +31,11 @@ export default function Navbar({
     if (window.location.pathname !== "/shop") {
       navigate("/shop")
     }
+  }
+
+  const logout = () => {
+    localStorage.removeItem("user")
+    window.location.reload()
   }
 
   return (
@@ -67,6 +73,7 @@ export default function Navbar({
 
         {/* RIGHT */}
         <div className="nav-right">
+
           {/* SEARCH */}
           <div className="search-box">
             <input
@@ -81,34 +88,56 @@ export default function Navbar({
           {/* WISHLIST */}
           <Link to="/wishlist" className="icon-badge">
             <FaHeart />
-            {wishlistCount > 0 && <span className="badge">{wishlistCount}</span>}
+            {wishlistCount > 0 && (
+              <span className="badge">{wishlistCount}</span>
+            )}
           </Link>
 
           {/* CART */}
           <Link to="/cart" className="icon-badge">
             <FaShoppingCart />
-            {cartCount > 0 && <span className="badge">{cartCount}</span>}
+            {cartCount > 0 && (
+              <span className="badge">{cartCount}</span>
+            )}
           </Link>
 
-          {/* LOGIN (HOVER + CLICK) */}
+          {/* USER SECTION */}
           <div
             className="user-dropdown"
             onMouseEnter={() => setUserOpen(true)}
             onMouseLeave={() => setUserOpen(false)}
           >
-            <FaUser
-              className="icon-btn"
-              onClick={() => setUserOpen((prev) => !prev)}
-            />
+            {/* IF LOGGED IN */}
+            {user ? (
+              <div
+                className="user-letter icon-btn"
+                onClick={() => setUserOpen((prev) => !prev)}
+              >
+                {user.email.charAt(0).toUpperCase()}
+              </div>
+            ) : (
+              <FaUser
+                className="icon-btn"
+                onClick={() => setUserOpen((prev) => !prev)}
+              />
+            )}
 
             {userOpen && (
               <div className="user-menu">
-                <Link to="/login" onClick={() => setUserOpen(false)}>
-                  Login
-                </Link>
-                <Link to="/signup" onClick={() => setUserOpen(false)}>
-                  Sign Up
-                </Link>
+                {!user ? (
+                  <>
+                    <Link to="/login" onClick={() => setUserOpen(false)}>
+                      Login
+                    </Link>
+                    <Link to="/signup" onClick={() => setUserOpen(false)}>
+                      Sign Up
+                    </Link>
+                  </>
+                ) : (
+                  <span onClick={logout} style={{ cursor: "pointer" }}>
+                    Logout
+                  </span>
+                )}
               </div>
             )}
           </div>
