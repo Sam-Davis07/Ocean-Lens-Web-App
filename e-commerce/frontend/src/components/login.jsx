@@ -1,19 +1,7 @@
 import "./login.css";
-
-/* 🔒 BACKEND IMPORTS – UNCHANGED */
 import { useState, useEffect } from "react";
-import app from "./firebase";
-import {
-  getAuth,
-  getRedirectResult,
-  GithubAuthProvider,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 
 /* 🎨 UI ASSETS (from new design) */
 import leftImage from "./assets/xfbxfb.jpg";
@@ -23,35 +11,64 @@ import line3 from "./assets/line2.svg";
 import line4 from "./assets/line2.svg";
 
 function Login() {
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-  const githubProvider = new GithubAuthProvider();
-  const [data, setData] = useState({});
-
+  const [user, setUser] = useState(null);
+  const [data, setData] = useState({
+    email: "",
+    password: ""
+  });
+  const navigate = useNavigate();
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+  
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+  
+  const signin = async () => {
+    const res = await fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  
+    const result = await res.json();
+  
+    if (result.success) {
+      alert("Login successful");
+      navigate("/");
+      localStorage.setItem("user", JSON.stringify(result.user));
+    } else {
+      alert(result.message);
+    }
+  };
+  const signup = async () => {
+    const res = await fetch("http://localhost:5000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  
+    const result = await res.json();
+  
+    if (result.success) {
+      alert("Account created successfully");
+    } else {
+      alert(result.message);
+    }
+  };
+      
   /* 🔒 LOGIC – UNCHANGED */
   const input = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  getRedirectResult(auth).catch(() => {});
 
-  const signin = () => {
-    signInWithEmailAndPassword(auth, data.email, data.password).catch(() => {});
-  };
 
-  const signup = () => {
-    createUserWithEmailAndPassword(auth, data.email, data.password).catch(
-      () => {}
-    );
-  };
-
-  const popup = () => {
-    signInWithPopup(auth, provider).catch(() => {});
-  };
-
-  useEffect(() => {
-    onAuthStateChanged(auth, () => {});
-  }, []);
 
   return (
     <div className="desktop">
@@ -63,7 +80,7 @@ function Login() {
 
       {/* RIGHT FORM */}
       <div className="right-section">
-        <h1>Create an account</h1>
+        <h1>Login</h1>
 
         {/* EMAIL */}
         <div className="input-group">
@@ -106,10 +123,6 @@ function Login() {
           <img src={line4} alt="" />
         </div>
 
-        {/* GOOGLE */}
-        <button className="secondary-btn" onClick={popup}>
-          Continue with Google
-        </button>
 
         {/* SIGN UP */}
         <p className="signup-text">
